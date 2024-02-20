@@ -1,0 +1,139 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Gender {
+  male
+  female
+}
+
+enum Role {
+  user
+  organizer
+}
+
+enum StockStatus {
+  available
+  booked
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  email String @unique
+  username String
+  password String
+  first_name String
+  last_name String
+  role Role? @default(user)
+  gender Gender?
+  address String?
+  referral_code String @default(uuid())
+  avatarUrl String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  isVerified Boolean @default(false)
+  events Event[]
+  transaction Transaction[]
+  points Points[]
+  discount Discount[]
+  reviews Review[]
+}
+
+model Review {
+  id Int @id @default(autoincrement())
+  review String
+  rating Int
+  userId Int
+  user   User  @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  eventId Int
+  event Event  @relation(fields: [eventId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Event {
+  id Int @id @default(autoincrement())
+  eventName String
+  price Decimal
+  imgUrl String
+  description String
+  location String
+  eventDate DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  userId Int
+  user   User  @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  stock Stock[]
+  event_category Event_Category[]
+  transaction_detail Transaction_Detail[]
+  discount Discount[]
+  reviews Review[]
+}
+
+model Stock {
+  id Int @id @default(autoincrement())
+  eventId Int
+  stock_qty Decimal
+  status StockStatus?
+  events Event  @relation(fields: [eventId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Category {
+  id Int @id @default(autoincrement())
+  category_name String
+  event_category Event_Category[]
+}
+
+model Event_Category{
+  eventId Int
+  categoryId Int
+  category  Category  @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  event  Event  @relation(fields: [eventId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  @@id([eventId,categoryId])
+}
+
+model Transaction {
+  id Int @id @default(autoincrement())
+  userId Int
+  invoice Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  user   User  @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  transaction_detail Transaction_Detail[]
+}
+
+model Transaction_Detail {
+  transactionId Int
+  totalPrice Decimal
+  qty Int
+  eventId Int
+  transaction   Transaction  @relation(fields: [transactionId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  event   Event  @relation(fields: [eventId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  @@id([eventId,transactionId])
+}
+
+model Points {
+  id Int @id @default(autoincrement())
+  userId Int
+  points Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  user   User  @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Discount {
+  id Int @id @default(autoincrement())
+  discount Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  userId Int
+  eventId Int
+  user   User  @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  event   Event  @relation(fields: [eventId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
