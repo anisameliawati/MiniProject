@@ -15,6 +15,7 @@ app.use(express.json());
 
 //routes
 app.use("/users", routes.userRoutes);
+app.use("/event", routes.eventRoutes);
 
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(500).send({ message: error.message || "internal server error" });

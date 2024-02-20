@@ -5,3 +5,5 @@ export const route: Router = express.Router();
 
 route.get("/", userController.login);
 route.post("/", userController.register);
+route.patch("/:id");
+route.delete("/:id");
