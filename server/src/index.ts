@@ -1,8 +1,9 @@
 import express, { Application, Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
 import { routes } from "./routes";
-
 import { config } from "dotenv";
+import cors from "cors";
+
 config();
 
 export const prisma = new PrismaClient();
@@ -12,6 +13,7 @@ const app: Application = express();
 const PORT = process.env.PORT;
 
 app.use(express.json());
+app.use(cors());
 
 //routes
 app.use("/users", routes.userRoutes);

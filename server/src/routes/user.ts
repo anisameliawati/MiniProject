@@ -3,7 +3,7 @@ import { userController } from "../controllers/user";
 
 export const route: Router = express.Router();
 
-route.get("/", userController.login);
-route.post("/", userController.register);
-route.patch("/:id");
-route.delete("/:id");
+route.get("/v1", userController.login);
+route.get("/v3", userController.keepLogin);
+route.post("/2", userController.register);
+// route.patch("/", userController.forgotPassword);
