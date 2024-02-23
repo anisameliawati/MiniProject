@@ -17,7 +17,7 @@ enum Gender {
 
 enum Role {
   user
-  organizer
+  admin
 }
 
 enum StockStatus {
@@ -28,7 +28,6 @@ enum StockStatus {
 model User {
   id Int @id @default(autoincrement())
   email String @unique
-  username String @unique
   password String
   first_name String
   last_name String

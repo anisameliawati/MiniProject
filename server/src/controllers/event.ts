@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { prisma } from "..";
 
 export const eventController = {
-  async create(req: Request, res: Response, next: NextFunction) {
+  async addProduct(req: Request, res: Response, next: NextFunction) {
     try {
       await prisma.event.create({
         data: req.body,
@@ -11,7 +11,7 @@ export const eventController = {
       next(error);
     }
   },
-  async read(req: Request, res: Response, next: NextFunction) {
+  async getProducts(req: Request, res: Response, next: NextFunction) {
     try {
       await prisma.event.findMany();
     } catch (error) {

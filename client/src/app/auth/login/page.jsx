@@ -22,7 +22,7 @@ function Page() {
         <div className=" m-auto ">
           <Image
             src={logo}
-            className="mx-auto md:h-[200px] w-auto h-[200px] p-3"
+            className="mx-auto md:h-[200px] w-auto h-[150px] p-3"
           />
         </div>
         <div className="flex flex-col justify-center items-center px-6 py-12 md:px-8 bg-[#F8F7F3] rounded-t-3xl md:rounded-l-3xl md:justify-center md:items-center">

@@ -11,8 +11,9 @@ type TUser = {
 export const userController = {
   async register(req: Request, res: Response, next: NextFunction) {
     try {
-      const { email, password, first_name, last_name, gender, username } =
-        req.body;
+      console.log("udin masuk");
+
+      const { email, password, first_name, last_name, gender, role } = req.body;
       const salt = await genSalt(10);
 
       const hashedPassword = await hash(password, salt);
@@ -23,7 +24,7 @@ export const userController = {
         first_name,
         last_name,
         gender,
-        username,
+        role,
       };
 
       const checkUser = await prisma.user.findUnique({
@@ -38,14 +39,13 @@ export const userController = {
         data: newUser,
       });
 
-      const token = sign({ email }, secretKey, {
-        expiresIn: "1hr",
-      });
       res.send({
         success: true,
         message: "berhasil register",
       });
     } catch (error) {
+      console.log(error);
+
       next(error);
     }
   },
@@ -67,7 +67,6 @@ export const userController = {
         last_name: user.last_name,
         gender: user.gender,
         role: user.role,
-        username: user.username,
       };
       if (checkPassword) {
         const token = sign(resUser, secretKey, {
@@ -124,7 +123,6 @@ export const userController = {
           first_name: true,
           last_name: true,
           role: true,
-          username: true,
         },
         where: {
           email: verifyUser.email,

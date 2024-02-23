@@ -1,6 +1,6 @@
 /** @format */
 
-import { axiosInstance, axiosInstanceSSR } from "@/axios/axios";
+import { axiosInstance } from "@/axios/axios";
 import { functionLogin, functionLogout } from "../slices/userSlice";
 
 export const userLogin = ({ email, password }) => {
