@@ -1,5 +1,8 @@
 import HeroComponents from "@/components/Hero";
 import NavbarComponents from "@/components/navbar";
+import EventList from "@/components/eventList";
+import Footer from "@/components/footer";
+import Pagination from "@/components/pagination";
 
 export const metadata = {
   title: "Ticketed - Home",
@@ -11,6 +14,9 @@ export default function Home() {
     <>
       <NavbarComponents />
       <HeroComponents />
+      <EventList />
+      <Pagination />
+      <Footer />
     </>
   );
 }

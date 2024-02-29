@@ -44,6 +44,7 @@ model User {
   points Points[]
   discount Discount[]
   reviews Review[]
+  promotion Promotion[]
 }
 
 model Review {
@@ -67,34 +68,29 @@ model Event {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
   userId Int
+  categoryId Int?
   user   User  @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   stock Stock[]
-  event_category Event_Category[]
+  category Category?  @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   transaction_detail Transaction_Detail[]
   discount Discount[]
   reviews Review[]
+  promotionId Int?
+  promotion Promotion?
 }
 
 model Stock {
   id Int @id @default(autoincrement())
   eventId Int
   stock_qty Decimal
-  status StockStatus?
+  status StockStatus? @default(available)
   events Event  @relation(fields: [eventId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model Category {
   id Int @id @default(autoincrement())
   category_name String
-  event_category Event_Category[]
-}
-
-model Event_Category{
-  eventId Int
-  categoryId Int
-  category  Category  @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  event  Event  @relation(fields: [eventId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  @@id([eventId,categoryId])
+  events Event[]
 }
 
 model Transaction {
@@ -135,4 +131,15 @@ model Discount {
   eventId Int
   user   User  @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   event   Event  @relation(fields: [eventId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Promotion{
+  id Int @id @default(autoincrement())
+  promotionBanner String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  eventId Int? @unique
+  event   Event?  @relation(fields: [eventId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user    User     @relation(fields: [userId], references: [id])
+  userId  Int
 }

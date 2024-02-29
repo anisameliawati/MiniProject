@@ -17,10 +17,10 @@ function Page() {
     initialValues: {
       first_name: "",
       last_name: "",
-      gender: "male",
       email: "",
       password: "",
       confirmpassword: "",
+      referral_code: "",
     },
     validationSchema: Yup.object().shape({
       first_name: Yup.string().required(),
@@ -28,6 +28,7 @@ function Page() {
       email: Yup.string().required().email("bukan email"),
       password: Yup.string().required().min(5),
       confirmpassword: Yup.string().required().min(5),
+      referral_code: Yup.string(),
     }),
     onSubmit: () => {
       alert("hello");
@@ -45,7 +46,8 @@ function Page() {
       user.first_name &&
       user.last_name &&
       user.password &&
-      user.gender
+      user.gender &&
+      user.referral_code
     ) {
       axiosInstance()
         .post("/users/v2", user)
@@ -144,8 +146,8 @@ function Page() {
                     onChange={formik.handleChange}
                     value={formik.values.gender}
                   >
-                    <option value={"male"}>Male</option>
-                    <option value={"female"}>Female</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
                   </select>
                 </div>
                 <div> {formik.errors.gender}</div>
@@ -187,6 +189,24 @@ function Page() {
                   />
                 </div>
                 <div> {formik.errors.confirmpassword}</div>
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="block text-sm font-medium leading-6 text-gray-900">
+                    Referral Code
+                  </div>
+                </div>
+                <div className="mt-2">
+                  <input
+                    placeholder="referral code"
+                    id="referralcode"
+                    type="referralcode"
+                    onChange={formik.handleChange}
+                    value={formik.values.referral_code}
+                    className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                  />
+                </div>
               </div>
 
               <div>

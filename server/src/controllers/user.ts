@@ -11,9 +11,15 @@ type TUser = {
 export const userController = {
   async register(req: Request, res: Response, next: NextFunction) {
     try {
-      console.log("udin masuk");
-
-      const { email, password, first_name, last_name, gender, role } = req.body;
+      const {
+        email,
+        password,
+        first_name,
+        last_name,
+        gender,
+        role,
+        referral_code,
+      } = req.body;
       const salt = await genSalt(10);
 
       const hashedPassword = await hash(password, salt);
@@ -25,6 +31,7 @@ export const userController = {
         last_name,
         gender,
         role,
+        referral_code,
       };
 
       const checkUser = await prisma.user.findUnique({
@@ -70,7 +77,7 @@ export const userController = {
       };
       if (checkPassword) {
         const token = sign(resUser, secretKey, {
-          expiresIn: "5m",
+          expiresIn: "8h",
         });
 
         return res.send({
@@ -84,30 +91,7 @@ export const userController = {
       next(error);
     }
   },
-  // async forgotPassword(req: Request, res: Response, next: NextFunction) {
-  //   try {
-  //     const { password, email } = req.body;
 
-  //     const salt = await genSalt(10);
-
-  //     const hashedPassword = await hash(password, salt);
-  //     const userEditPassword: Prisma.UserUpdateInput = {
-  //       password: hashedPassword,
-  //     };
-  //     await prisma.user.update({
-  //       data: userEditPassword,
-  //       where: {
-  //         email: String(email),
-  //       },
-  //     });
-  //     res.send({
-  //       success: true,
-  //       message: "berhasil merubah password",
-  //     });
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // },
   async keepLogin(req: Request, res: Response, next: NextFunction) {
     try {
       const { authorization } = req.headers;
@@ -131,7 +115,7 @@ export const userController = {
       if (!checkUser) throw Error("unauthorized 2");
 
       const token = sign(checkUser, secretKey, {
-        expiresIn: "5m",
+        expiresIn: "8h",
       });
       res.send({
         success: true,
