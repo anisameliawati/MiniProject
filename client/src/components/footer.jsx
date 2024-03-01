@@ -7,34 +7,34 @@ import Image from "next/image";
 function Footer() {
   return (
     <>
-      <div className="bg-[#F5D250] grid">
-        <div className="flex justify-around items-center mx-10 my-4 gap-2 sm:gap-6">
+      <div className="bg-[#F5D250]">
+        <div className="flex justify-around items-center md:px-10 px-5 py-4 gap-2 sm:gap-6">
           <div className="text-start">
-            <div className=" text-[#274C5B] font-semibold text-[20px]">
+            <div className=" text-[#274C5B] font-semibold md:text-[20px] text-[12px]">
               Contact Us
             </div>
-            <div className=" text-[#274C5B] font-semibold text-[15px] mt-2">
+            <div className=" text-[#274C5B] font-semibold md:text-[15px] text-[10px] mt-2">
               Email
             </div>
-            <div className="font-sans font-light text-[#274C5B] text-[14px]">
+            <div className="font-sans font-light text-[#274C5B] md:text-[14px] text-[10px]">
               needhelp@ticketed.com
             </div>
-            <div className=" text-[#274C5B] font-semibold text-[15px] mt-2">
+            <div className=" text-[#274C5B] font-semibold md:text-[15px] text-[10px] mt-2">
               Phone
             </div>
-            <div className="font-sans font-light text-[#274C5B] text-[14px]">
+            <div className="font-sans font-light text-[#274C5B] md:text-[14px] text-[10px]">
               123 456 789
             </div>
-            <div className=" text-[#274C5B] font-semibold text-[15px] mt-2">
+            <div className=" text-[#274C5B] font-semibold md:text-[15px] text-[10px] mt-2">
               Address
             </div>
-            <div className="font-sans font-light text-[#274C5B] text-[14px]">
+            <div className="font-sans font-light text-[#274C5B] md:text-[14px] text-[10px]">
               Jl. Jenderal Sudirman No.Kav. 21
             </div>
           </div>
           <div>
-            <Image src={logo2} className="m-auto h-20 w-auto" />
-            <div className="text-center font-sans font-light text-[#274C5B] text-[14px] m-4">
+            <Image src={logo2} className="m-auto md:h-20 h-11 w-auto" />
+            <div className="text-center font-sans font-light text-[#274C5B] md:text-[14px] text-[10px] m-4">
               We are a popular and trusted company aspiring to be a leader in
               the Ticket Agency Industry.
             </div>
@@ -51,16 +51,16 @@ function Footer() {
             </div>
           </div>
           <div className="text-end">
-            <div className=" text-[#274C5B] font-semibold text-[20px]">
+            <div className=" text-[#274C5B] font-semibold md:text-[20px] text-[12px]">
               Company
             </div>
-            <div className=" text-[#274C5B] font-semibold text-[15px] mt-4">
+            <div className=" text-[#274C5B] font-semibold md:text-[15px] text-[10px] mt-4">
               Tickets
             </div>
-            <div className=" text-[#274C5B] font-semibold text-[15px] mt-4">
+            <div className=" text-[#274C5B] font-semibold md:text-[15px] text-[10px] mt-4">
               About Us
             </div>
-            <div className=" text-[#274C5B] font-semibold text-[15px] mt-4">
+            <div className=" text-[#274C5B] font-semibold md:text-[15px] text-[10px] mt-4">
               Our Team
             </div>
           </div>

@@ -151,7 +151,7 @@ function Page() {
     <>
       <NavbarAdmin />
       <div className="w-full mt-2">
-        <div className="flex flex-col justify-center  max-w-[1000px] w-full items-center m-auto  ">
+        <div className="flex flex-col justify-center max-w-[1000px] items-center m-auto  ">
           <div className="py-5 w-full">
             <div className="flex justify-center items-center ">
               <input
@@ -165,30 +165,31 @@ function Page() {
               </div>
             </div>
           </div>
-
-          <table className="w-full">
-            <tr className=" text-center ">
-              <th>EVENT BANNER</th>
-              <th>EVENT NAME</th>
-              <th>EVENT DATE</th>
-              <th>PRICE</th>
-              <th>LOCATION</th>
-              <th>CATEGORY</th>
-              <th>STOCK</th>
-            </tr>
-            {events.map((event, key) => (
-              <AdminProductCard
-                {...event}
-                key={key}
-                edit={() => edit(event.id)}
-                hapus={() => hapus(event.id)}
-              />
-            ))}
-          </table>
+          <div className="overflow-auto">
+            <table className="w-full">
+              <tr className=" text-center divide-x">
+                <th className="whitespace-nowrap">EVENT BANNER</th>
+                <th className="whitespace-nowrap">EVENT NAME</th>
+                <th className="whitespace-nowrap">EVENT DATE</th>
+                <th className="whitespace-nowrap">PRICE</th>
+                <th className="whitespace-nowrap">LOCATION</th>
+                <th className="whitespace-nowrap">CATEGORY</th>
+                <th className="whitespace-nowrap">STOCK</th>
+              </tr>
+              {events.map((event, key) => (
+                <AdminProductCard
+                  {...event}
+                  key={key}
+                  edit={() => edit(event.id)}
+                  hapus={() => hapus(event.id)}
+                />
+              ))}
+            </table>
+          </div>
           <div className="mt-16 w-full py-3">
             <form id="form" action="">
               <h1 className="font-bold text-2xl mb-3">Add Event</h1>
-              <div className="flex flex-col gap-1 ">
+              <div className="flex flex-col gap-1">
                 <table>
                   <tr>
                     <td> Event Name</td>

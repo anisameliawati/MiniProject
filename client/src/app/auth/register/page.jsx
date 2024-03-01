@@ -18,9 +18,10 @@ function Page() {
       first_name: "",
       last_name: "",
       email: "",
+      gender: "",
       password: "",
       confirmpassword: "",
-      referral_code: "",
+      // referral_code: "",
     },
     validationSchema: Yup.object().shape({
       first_name: Yup.string().required(),
@@ -28,7 +29,7 @@ function Page() {
       email: Yup.string().required().email("bukan email"),
       password: Yup.string().required().min(5),
       confirmpassword: Yup.string().required().min(5),
-      referral_code: Yup.string(),
+      // referral_code: Yup.string(),
     }),
     onSubmit: () => {
       alert("hello");
@@ -40,14 +41,12 @@ function Page() {
   }, [formik.values]);
   const mendaftar = () => {
     const user = formik.values;
-    console.log(user);
     if (
       user.email &&
       user.first_name &&
       user.last_name &&
       user.password &&
-      user.gender &&
-      user.referral_code
+      user.gender
     ) {
       axiosInstance()
         .post("/users/v2", user)
@@ -144,6 +143,7 @@ function Page() {
                   <select
                     className=" py-2 px-1 bg-[#FFFF] text-gray-400 font-medium border text-sm rounded-lg  "
                     onChange={formik.handleChange}
+                    id="gender"
                     value={formik.values.gender}
                   >
                     <option value="male">Male</option>

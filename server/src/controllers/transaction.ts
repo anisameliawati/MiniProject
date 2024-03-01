@@ -14,4 +14,24 @@ export const transactionController = {
       next(error);
     }
   },
+
+  async addTransaction(req: Request, res: Response, next: NextFunction) {
+    const { eventId, stock, price } = req.body;
+    const newTransaction: Prisma.TransactionCreateInput = {
+      user: {
+        connect: {
+          id: Number(user.id),
+        },
+      },
+      event: {
+        connect: {
+          id: eventId,
+        },
+      },
+      price,
+    };
+    await prisma.transaction.create({
+      data: newTransaction,
+    });
+  },
 };

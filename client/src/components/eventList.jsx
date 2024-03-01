@@ -48,17 +48,17 @@ function EventList() {
   return (
     <>
       <div
-        className="flex justify-center items-center mt-4 gap-[10%] cursor-pointer bg-[#F8F7F3] py-5 mx-36 rounded-lg"
+        className="flex text-15px justify-center items-center mt-4 md:gap-[10%] md:text-base text-xs gap-2 cursor-pointer bg-[#F8F7F3] py-5 md:mx-36 mx-20 rounded-lg"
         value={search}
       >
         <div
           // value={category.id}
-          className="flex items-center gap-2"
+          className="flex items-center md:gap-2"
           onClick={() => {
             dispatch(changeEventCategory(""));
           }}
         >
-          <Image src={logo2} className="h-7 w-auto" />
+          <Image src={logo2} className="lg:h-7 lg:w-auto h-4 w-auto" />
           Semua{" "}
         </div>
 
@@ -108,9 +108,11 @@ export function EventCard({
               alt=""
             />
           </div>
-          <div className="p-5 w-full h-full flex flex-col justify-between gap-2">
-            <div className=" font-bold w-full text-[#1F5673]"> {eventName}</div>
-            <div className=" font-medium w-full text-slate-400 text-sm">
+          <div className="md:p-5 lg:p-5 p-2 w-full h-full flex flex-col justify-between gap-2">
+            <div className=" font-bold w-full text-[#1F5673] md:text-sm text-xs">
+              {eventName}
+            </div>
+            <div className=" font-medium w-full text-slate-400 md:text-base text-xs">
               {moment(eventDate).format("DD  MMMM  YYYY")}
             </div>
 
@@ -118,13 +120,13 @@ export function EventCard({
               {category?.category_name}
             </div>
 
-            <div className="flex justify-between">
+            <div className="md:flex justify-between md:text-sm text-xs">
               <div className="text-[#E02828] font-semibold  ">
                 {eventPrice === "free"
                   ? "FREE"
                   : `IDR ${Number(eventPrice).toLocaleString("id-ID")}`}
               </div>
-              <div className="flex items-center text-[#676666] text-sm">
+              <div className="flex items-center text-[#676666] md:text-sm text-xs">
                 <IoLocationOutline />
                 {location}
               </div>

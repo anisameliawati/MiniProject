@@ -153,11 +153,6 @@ export const eventController = {
             id: Number(category),
           },
         },
-        // stock: {
-        //   connect: {
-        //     id: Number(stock),
-        //   },
-        // },
       };
 
       await prisma.$transaction(async (prisma) => {
@@ -211,11 +206,24 @@ export const eventController = {
   },
   async deleteEvent(req: Request, res: Response, next: NextFunction) {
     try {
+      const checkStock = await prisma.stock.findFirst({
+        where: {
+          eventId: Number(req.params.id),
+        },
+      });
+
+      if (checkStock)
+        await prisma.stock.delete({
+          where: {
+            id: checkStock.id,
+          },
+        });
       await prisma.event.delete({
         where: {
           id: Number(req.params.id),
         },
       });
+
       res.send({
         success: true,
         message: "data berhasil dihapus",

@@ -21,15 +21,15 @@ async function Page({ params }) {
   return (
     <>
       <NavbarComponent />
-      <div className="flex px-10 mt-10 gap-10 rounded-lg">
-        <div className="max-w-[60%] ">
+      <div className="md:flex px-10 mt-10 gap-10 rounded-lg">
+        <div className="md:max-w-[60%] md:max-h-[40%]">
           <img
             className="rounded-lg"
             src={process.env.API_URL + event.imgUrl}
             alt=""
           />
         </div>
-        <div className="w-[30%] bg-[#F8F7F3] rounded-xl text-center items-start gap-6 px-10 flex flex-col pt-6">
+        <div className="md:w-[30%] bg-[#F8F7F3] rounded-xl text-center items-start gap-6 px-10 flex flex-col pt-6">
           <div className=" font-semibold text-xl">{event.eventName}</div>
           <div>
             <div className=" flex items-center gap-2">
@@ -54,8 +54,8 @@ async function Page({ params }) {
               Buy Ticket
             </button>
           </Link>
-          <div className="flex flex-col items-start">
-            <div>Description</div>
+          <div className="flex flex-col items-start mb-3">
+            <div className="font-bold">Description</div>
             <div>{event.description}</div>
           </div>
         </div>
